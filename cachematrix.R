@@ -1,9 +1,10 @@
 ## Put comments here that give an overall description of what your
 ## functions do
 
-## Write a short comment describing this function
-
+## makeCacheMatrix contains a matrix and cache its inverse version
 makeCacheMatrix <- function(x = matrix()) {
+    ## makeCacheMatrix contains a matrix and its inverse version
+    ## user can access both of them via cacheSolve function
     inv <- NULL
     set <- function(y){
         x <<- y
@@ -19,19 +20,20 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## Write a short comment describing this function
-
+## cacheSolve computes the composite data structure created by makeCacheMatrix
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
-        inv <- x$getinv()
-        if(!is.null(inv)) {
-                message("getting cached data")
-                return(inv)
-        }
-        data <- x$get()
-        inv <- solve(data)
-        x$setinv(inv)
-        inv
+    ## cacheSolve computes the composite data structure created by makeCacheMatrix
+    ## once the inverse of matrix is computed, it will automatically 
+    ## cache it into the struture of makeCacheMatrix
+    inv <- x$getinv()
+    if(!is.null(inv)) {
+        message("getting cached data")
+        return(inv)
+    }
+    data <- x$get()
+    inv <- solve(data)
+    x$setinv(inv)
+    inv
 }
 
 
